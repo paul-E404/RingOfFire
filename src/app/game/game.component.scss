@@ -1,0 +1,23 @@
+.field {
+    height: 100vh;
+    width: 100%;
+    background-image: url(../../assets/img/background-table.jpg);
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    .card-deck {
+        position: relative;
+        height: 32vh;
+        width: 50%;
+
+        img {
+            position: absolute;
+            bottom: 8vh;
+            height: 100%;
+            transform: perspective(550px) rotateX(64deg);
+        }
+    }
+}
