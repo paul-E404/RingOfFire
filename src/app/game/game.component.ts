@@ -22,9 +22,12 @@ export class GameComponent implements OnInit {
     if (!this.cardIsTaken) {
       this.cardIsTaken = true;
       this.currentCard = this.game.stack.pop();
+      /* this.game.playedCards.push(this.currentCard); */
       console.log("currentCard", this.currentCard);
+      console.log("this.game", this.game);
     }
     setTimeout(() => {
+      this.game.playedCards.push(this.currentCard);
       this.cardIsTaken = false;
       this.currentCard = 'red_back';
     }, 3000)

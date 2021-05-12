@@ -27,6 +27,7 @@
 .top-card {
     cursor: pointer;
     transition: all 225ms ease-in-out;
+    z-index: 1;     //alternative: redo order of img tags in game.component.html
 }
 
 .top-card:hover {
@@ -39,8 +40,14 @@
 .picked-card {
     animation: picked-card-animation 3s ease-in-out;
     animation-fill-mode: forwards;  
-    
 }
+
+.played-card {
+    transform: translateX(400px) translateY(2vh) scale(1.1) perspective(800px) rotateX(64deg) rotateZ(12deg) !important;
+}
+
+
+
 
 @keyframes picked-card-animation {
     0% {
