@@ -28,7 +28,9 @@ export class GameComponent implements OnInit {
     }
     setTimeout(() => {
       this.game.playedCards.push(this.currentCard);
-      this.cardIsTaken = false;
+      if(this.game.stack.length > 0) {
+        this.cardIsTaken = false;
+      }
       this.currentCard = 'red_back';
     }, 3000)
   }

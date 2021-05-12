@@ -16,7 +16,7 @@
 
     img {
         position: absolute;
-        bottom: 8vh;
+        /* bottom: 8vh; */
         height: 100%;
         transform: translateY(0) perspective(550px) rotateX(64deg);
     }
@@ -53,7 +53,10 @@
     0% {
         filter: brightness(1);
     }
-    20% {
+    10% {
+        transform: translateX(25px) translateY(-4vh) perspective(700px) rotateX(60deg);
+    }
+    30% {
         transform: translateX(200px) translateY(-35vh) scale(1.2) perspective(700px) rotateX(12deg);
     }
     85% {
