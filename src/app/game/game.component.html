@@ -2,6 +2,8 @@
     <div class="card-deck">
         <!-- for-Schleife -->
         <!-- c ist eine Variable, die durch ein Array iteriert (die Einträge im Array sind willkürlich)-->
-        <img *ngFor="let c of [0,1,2,3,4, 5]; let i = index;" [ngStyle]="{'left.px': i * 5}" src="../../assets/img/cards/red_back.png" alt="card-cover">
+        <img *ngFor="let c of [0,1,2,3,4]; let i = index;" [ngStyle]="{'left.px': i * 5}" src="assets/img/cards/red_back.png" alt="card-deck">
+        <img (click)="takeCard()" class="top-card" [class.picked-card]="cardIsTaken" style="left: 40px" src=' {{ "assets/img/cards/" + cardImageName + ".png" }}' alt="top-card">
+        <!-- <img (click)="takeCard()" *ngIf="cardIsTaken" class="top-card picked-card" style="left: 40px" src="assets/img/cards/2C.png" alt="picked-card"> -->
     </div>
 </div>

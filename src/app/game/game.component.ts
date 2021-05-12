@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
+  cardImageName = "red_back";
+  cardIsTaken = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  takeCard() {
+    this.cardIsTaken = true;
+    this.cardImageName = "2C";
   }
 
 }
