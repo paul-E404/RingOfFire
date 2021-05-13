@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +14,7 @@ export class GameComponent implements OnInit {
   cardIsTaken = false;
   game: Game;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
@@ -22,9 +24,6 @@ export class GameComponent implements OnInit {
     if (!this.cardIsTaken) {
       this.cardIsTaken = true;
       this.currentCard = this.game.stack.pop();
-      /* this.game.playedCards.push(this.currentCard); */
-      console.log("currentCard", this.currentCard);
-      console.log("this.game", this.game);
     }
     setTimeout(() => {
       this.game.playedCards.push(this.currentCard);
@@ -32,12 +31,23 @@ export class GameComponent implements OnInit {
         this.cardIsTaken = false;
       }
       this.currentCard = 'red_back';
+      this.game.currentPlayer++;
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
     }, 3000)
   }
 
   newGame() {
     this.game = new Game();
     console.log("this.game", this.game);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe( (name: string) => {
+      console.log('The dialog was closed', name);
+      this.game.players.push(name);
+    });
   }
 
 }
