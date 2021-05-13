@@ -10,7 +10,7 @@
 
     img {
         width: 100%;
-        box-shadow: 0 0 4px rgb(253, 240, 120);
+        box-shadow: 0 0 6px white;
     }
 }
 
@@ -30,7 +30,12 @@
 
     .letters {
         width: 100%;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
+
+        /* background: rgba(0, 204, 255, 0.4); */
+        background: linear-gradient(rgba(153, 228, 247, 0.4), rgba(59, 212, 250, 0.4), rgba(0, 143, 179, 0.4));
+        border-radius: 50%;
+        box-shadow: 0 4px 6px lightblue;
     }
 
     .start-label-box {
@@ -41,10 +46,10 @@
         .start-label {
             width: 80%;
             cursor: pointer;
-            filter: grayscale(1);
+            filter: hue-rotate(45deg);
 
             &:hover {
-                filter: unset !important;
+                filter: grayscale(1) !important;
             }
         }
     }
