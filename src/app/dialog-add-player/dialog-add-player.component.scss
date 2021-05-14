@@ -1,5 +1,5 @@
 .avatars-container {
-    width: 270px;
+    width: 280px;
     /* background-color: red; */
     display: flex;
     flex-wrap: wrap;
@@ -11,12 +11,13 @@
     height: 75px;
     margin: 5px;
     border-radius: 5px;
-    border: 2px solid rgb(103, 58, 183);
+    /* border: 2px solid rgb(103, 58, 183); */
     cursor: pointer;
+    border: 3px solid transparent;
 
     &:hover {
-        /* filter: drop-shadow(0 0px 4px rgb(59, 19, 133)); */
         box-shadow: 0 0px 4px rgb(59, 19, 133);
+        
     }
 }
 
@@ -24,6 +25,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 5px;
   /*   margin: 5px;
     border-radius: 5px;
     cursor: pointer;
@@ -31,7 +33,8 @@
 }
 
 .highlight-avatar {
-    border: 3px solid rgb(59, 19, 133) !important;
+    /* border: 3px solid rgb(59, 19, 133) !important; */
+    box-shadow: 0 0px 4px rgb(59, 19, 133) !important;
 }
 
 .check-icon {
