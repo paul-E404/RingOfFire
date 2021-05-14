@@ -1,4 +1,5 @@
 <mat-card class="game-info-box">
-    <mat-card-title>{{ title }}</mat-card-title>
-    <mat-card-content>{{ description }}</mat-card-content>
+    <!-- if the variable title / description is set, show title / description of the current card, else prompt the user to take a card -->
+    <mat-card-title>{{ title ? title : 'Take a card!' }}</mat-card-title>
+    <mat-card-content>{{ description ? description : 'Click on the card stack to pick a card.'}}</mat-card-content>
 </mat-card>

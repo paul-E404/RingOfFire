@@ -9,6 +9,7 @@
     border-bottom-right-radius: 50px;
     margin-bottom: 16px;
     filter: brightness(0.9);
+    transition: all 225ms ease-in-out;
 
     img {
         height: 75px;
@@ -27,7 +28,8 @@
 }
 
 .player-active {
-    width: 120%;
+    width: 115%;
     box-shadow: 0 0 5px white;
     filter: brightness(1) !important;
+    transition: all 225ms ease-in-out;
 }
