@@ -20,6 +20,12 @@ export class Game {
     }
 }
 
+export class Player {
+    public name: string = '';
+    public playerActive: boolean = false;
+    public avatarSrc: string = '';
+}
+
 
 //Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array: string[]) {

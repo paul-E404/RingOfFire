@@ -9,21 +9,22 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class DialogAddPlayerComponent implements OnInit {
 
   name: string = '';
-  avatarNumber: number;
+  public chosenAvatar: string;
+  avatarSources: string[] = ['ava1.png', 'ava2.png', 'ava3.png', 'ava4.png', 'ava5.png', 'ava6.png', 'ava7.png', 'ava8.png', 'ava9.png'];
 
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
 
   ngOnInit(): void {
-    console.log("avatar Number", this.avatarNumber);
+    console.log("avatar Sources", this.avatarSources);
   }
 
   onNoClick() {
     this.dialogRef.close();
   }
 
-  chooseAvatar(i: number) {
-    this.avatarNumber = i;
-    console.log("avatar Number", this.avatarNumber);
+  chooseAvatar(avatarSrc: string) {
+    this.chosenAvatar = avatarSrc;
+    console.log("chosenAvatar", this.chosenAvatar);
   }
 
 
