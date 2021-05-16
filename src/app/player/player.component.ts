@@ -25,6 +25,7 @@ export class PlayerComponent implements OnInit {
     this.player.name = this.name;
     this.player.playerActive = this.playerActive;
    /*  this.player.avatarSrc = chosenAvatar; */
+   this.player.avatarSrc = this.avatarSrc;
   }
 
   

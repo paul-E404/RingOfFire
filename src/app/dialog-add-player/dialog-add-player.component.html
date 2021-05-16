@@ -8,9 +8,9 @@
   </mat-form-field>
   <p>Choose a profile picture:</p>
   <div class="avatars-container">
-    <div (click)="chooseAvatar(avatarSources[i])" [class.highlight-avatar]="chosenAvatar == avatar" *ngFor="let avatar of avatarSources; let i = index;" class="avatar-box">
+    <div (click)="chooseAvatar(avatarSources[i])" [class.highlight-avatar]="avatarSrc == avatar" *ngFor="let avatar of avatarSources; let i = index;" class="avatar-box">
       <img class="avatar" src="assets/img/avatars/{{ avatar }}" alt="avatar">
-      <img *ngIf="chosenAvatar == avatar" class="check-icon" src="assets/img/avatars/check.png" alt="check-icon">
+      <img *ngIf="avatarSrc == avatar" class="check-icon" src="assets/img/avatars/check.png" alt="check-icon">
     </div>
   </div>
 

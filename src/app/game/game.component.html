@@ -3,7 +3,7 @@
         <!-- [name] ist eine Input-Variable, welche der app-Komponente hinzugefügt wird -->
         <app-player *ngFor="let player of game.players, let i = index;" [name]="player" [playerActive]="i == game.currentPlayer">
         </app-player>
-        <button (click)="openDialog()" mat-fab color="primary" class="btn-add">
+        <button *ngIf="game.players.length < 9" (click)="openDialog()" mat-fab color="primary" class="btn-add">
             <mat-icon>add</mat-icon>
         </button>
     </div>
