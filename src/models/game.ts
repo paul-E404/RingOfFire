@@ -6,6 +6,8 @@ export class Game {
     public stack: string[] = [];
     public playedCards: string [] = [];
     public currentPlayer: number = 0;
+    public currentCard: string = 'red_back';
+    public cardIsTaken = false;
 
     //Der Konstruktor ist die erste Methode die bei Instanziierung eines Objektes (Erstellung eines Objektes mit ...= new Classname) aufgerufen wird.
     constructor() {
@@ -17,6 +19,19 @@ export class Game {
         }
 
         shuffle(this.stack);
+    }
+
+    //Umwandlung von einem Game-Objekt in ein JSON-Objekt damit dieses in der Firebase Datenbank gespeichert werden kann
+    public toJSON() {
+        return {
+            players: this.players,
+            stack: this.stack,
+            playedCards: this.playedCards, 
+            currentPlayer: this.currentPlayer,
+            currentCard: this.currentCard,
+            cardIsTaken: this.cardIsTaken
+
+        };
     }
 }
 

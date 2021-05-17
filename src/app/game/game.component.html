@@ -18,7 +18,7 @@
 
         <!-- CURRENT CARD (Animation) -->
         <img (click)="takeCard()" [ngStyle]="{'bottom.px': 51 + game.stack.length * 1}" class="top-card"
-            [class.picked-card]="cardIsTaken" src="assets/img/cards/{{ currentCard }}.png" alt="top-card">
+            [class.picked-card]="game.cardIsTaken" src="assets/img/cards/{{ game.currentCard }}.png" alt="top-card">
 
         <!-- STACK WITH PLAYED CARDS -->
         <!-- card ist hier eine willkürlich gesetzte Variable, die durch das Array game.playedCards iteriert -->
@@ -27,6 +27,6 @@
 
     </div>
 
-    <app-game-info [card]="currentCard"></app-game-info>
+    <app-game-info [card]="game.currentCard"></app-game-info>
 
 </div>

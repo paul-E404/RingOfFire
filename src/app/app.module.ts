@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';          //Angular Firebase importieren
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +33,7 @@ import { MatCardModule } from '@angular/material/card';
     GameInfoComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase),      //Angular Firebase importieren
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
