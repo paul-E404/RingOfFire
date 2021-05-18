@@ -73,28 +73,20 @@ export class GameComponent implements OnInit {
       .add(this.game.toJSON()); */
   }
 
-  /*  openDialog(): void {
-     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
- 
-     dialogRef.afterClosed().subscribe((name: string) => {
-       console.log('The dialog was closed', name);
-       if (name && name.length > 0) {
-         this.game.players.push(name);
-         this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
-       }
-     });
-   } */
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-      if(result.name && result.avatarSrc) {
-        this.game.players.push(result);
-        console.log("players array: ", this.game.players);
-        this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
+      if(result) {
+        if(result.name && result.avatarSrc) {
+          this.game.players.push(result);
+          console.log("players array: ", this.game.players);
+          console.log("this.game", this.game);
+          this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
+        }
       }
+     
     });
   }
 
@@ -104,6 +96,7 @@ export class GameComponent implements OnInit {
       .firestore
       .collection('games')          //Name der Sammlung im Cloud Firestore: "games"
       .doc(this.gameId)             //Im Dokument der Sammlung mit der betreffenden ID
-      .update(this.game.toJSON());  //Wird das aktualisierte JSON-Objekt gespeichert.
+      /* .update(this.game.toJSON()); */                //Wird das aktualisierte JSON-Objekt gespeichert. (Junus Lösung)
+      .update(JSON.parse(JSON.stringify(this.game)));   //Lösung Stackoverflow (mit dieser Lösung kann das Player Objekt mit new Player erstellt werden!)
   }
 }

@@ -23,7 +23,8 @@ export class StartscreenComponent implements OnInit {
     this                        //Dieses Game Objekt wird in ein JSON Objekt umgewandelt und in der Collection "games" gespeichert.
       .firestore
       .collection('games')
-      .add(game.toJSON())
+      /* .add(game.toJSON()) */
+      .add(JSON.parse(JSON.stringify(game)))    //...damit ein Objekt new Player erstellt werden kann!
       .then ((gameInfo: any) => {            //then() wird im Gegensatz zu subscribe() nicht mehrfach, sondern nur einmal aufgerufen und gibt ein Promise-Objekt zurück.
         console.log("gameInfo", gameInfo);    //Aus dem Promise gameInfo wird die id ausgelesen:
         this.router.navigateByUrl('/game/' + gameInfo.id);  //Navigation zum Spiel, welches die betreffende ID in der URL hat.

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Player } from 'src/models/game';
 
 @Component({
   selector: 'app-player',
@@ -8,7 +7,7 @@ import { Player } from 'src/models/game';
 })
 export class PlayerComponent implements OnInit {
 
-  @Input() playerActive: boolean;       //kann gelöscht werden?
+  @Input() playerActive: boolean;      
   @Input() player: any;    //Diese Input Variable wird in der game.component.html als [player] in <app-player> verwendet.
 
   constructor() { }

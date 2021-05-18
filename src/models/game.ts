@@ -22,7 +22,7 @@ export class Game {
     }
 
     //Umwandlung von einem Game-Objekt in ein JSON-Objekt damit dieses in der Firebase Datenbank gespeichert werden kann
-    public toJSON() {
+   /*  public toJSON() {
         return {
             players: this.players,
             stack: this.stack,
@@ -32,12 +32,11 @@ export class Game {
             cardIsTaken: this.cardIsTaken
 
         };
-    }
+    } */
 }
 
 export class Player {
     public name: string = '';
-    public playerActive: boolean = false;
     public avatarSrc: string = '';
 }
 

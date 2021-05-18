@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'; 
+import { MatDialogRef } from '@angular/material/dialog'; 
 import { Player } from 'src/models/game';
 
 @Component({
@@ -16,8 +16,13 @@ export class DialogAddPlayerComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
 
   ngOnInit(): void {
-    console.log("avatar Sources", this.avatarSources);
     this.player = new Player();         //Neues Objekt von Typ Player erzeugen
+    console.log("this.player", this.player);
+    /* this.player = {
+      name: "",
+      avatarSrc: ""
+    }; */
+    
   }
 
   onNoClick() {
