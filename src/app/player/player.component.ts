@@ -8,26 +8,23 @@ import { Player } from 'src/models/game';
 })
 export class PlayerComponent implements OnInit {
 
-  @Input() name;
-  @Input() playerActive: boolean = false;
-  @Input() avatarSrc: string = '';
-  player: Player;
+  @Input() playerActive: boolean;       //kann gelöscht werden?
+  @Input() player: any;    //Diese Input Variable wird in der game.component.html als [player] in <app-player> verwendet.
 
   constructor() { }
 
   ngOnInit(): void {
-    this.newPlayer();
+    /* this.newPlayer(); */
   }
 
-  newPlayer() {
+/*   newPlayer() {
     this.player = new Player();
-    console.log("player", this.player);
     this.player.name = this.name;
     this.player.playerActive = this.playerActive;
-   /*  this.player.avatarSrc = chosenAvatar; */
-   this.player.avatarSrc = this.avatarSrc;
+    this.player.avatarSrc = this.avatarSrc;
+    console.log("player in der player.component.ts", this.player);
   }
+ */
 
-  
 
 }

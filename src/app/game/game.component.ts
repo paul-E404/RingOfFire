@@ -12,10 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
 
-/*   currentCard: string = 'red_back';
-  cardIsTaken = false; */
+  /*   currentCard: string = 'red_back';
+    cardIsTaken = false; */
   game: Game;
   gameId: string;
+
+  players = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
@@ -71,13 +73,26 @@ export class GameComponent implements OnInit {
       .add(this.game.toJSON()); */
   }
 
+  /*  openDialog(): void {
+     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+ 
+     dialogRef.afterClosed().subscribe((name: string) => {
+       console.log('The dialog was closed', name);
+       if (name && name.length > 0) {
+         this.game.players.push(name);
+         this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
+       }
+     });
+   } */
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe((name: string) => {
-      console.log('The dialog was closed', name);
-      if (name && name.length > 0) {
-        this.game.players.push(name);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if(result.name && result.avatarSrc) {
+        this.game.players.push(result);
+        console.log("players array: ", this.game.players);
         this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
       }
     });

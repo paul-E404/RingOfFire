@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'; 
 import { Player } from 'src/models/game';
 
 @Component({
@@ -9,26 +9,26 @@ import { Player } from 'src/models/game';
 })
 export class DialogAddPlayerComponent implements OnInit {
 
-  name: string = '';
-  avatarSrc: string = '';
-  /* public chosenAvatar: string; */
   avatarSources: string[] = ['ava1.png', 'ava2.png', 'ava3.png', 'ava4.png', 'ava5.png', 'ava6.png', 'ava7.png', 'ava8.png', 'ava9.png'];
-  player: Player;
-
+  player: any;
+  clickedAvatarNumber: number;
+  
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
 
   ngOnInit(): void {
     console.log("avatar Sources", this.avatarSources);
+    this.player = new Player();         //Neues Objekt von Typ Player erzeugen
   }
 
   onNoClick() {
     this.dialogRef.close();
   }
 
-  chooseAvatar(avatarSrc: string) {
-    /* this.chosenAvatar = avatarSrc; */
-    this.player.avatarSrc = avatarSrc;
-    console.log("avatarSrc", avatarSrc);
+  setAvatar(src: string, i: number) {
+    this.player.avatarSrc = src;
+    console.log("this.player.avatarSrc", this.player.avatarSrc);
+    this.clickedAvatarNumber = i;
+    console.log("this.clickedAvatarNumber", this.clickedAvatarNumber);
   }
 
 

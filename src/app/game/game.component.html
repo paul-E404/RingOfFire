@@ -1,7 +1,10 @@
 <div class="field">
     <div class="player-section">
         <!-- [name] ist eine Input-Variable, welche der app-Komponente hinzugefügt wird -->
-        <app-player *ngFor="let player of game.players, let i = index;" [name]="player" [playerActive]="i == game.currentPlayer">
+      <!--   <app-player *ngFor="let player of game.players, let i = index;" [name]="player" [playerActive]="i == game.currentPlayer">
+        </app-player> -->
+        <!-- [player] ist die @Input-Variable aus der player.components.ts -->
+        <app-player *ngFor="let player of game.players, let i = index;" [player]="player" [playerActive]="i == game.currentPlayer">
         </app-player>
         <button *ngIf="game.players.length < 9" (click)="openDialog()" mat-fab color="primary" class="btn-add">
             <mat-icon>add</mat-icon>
