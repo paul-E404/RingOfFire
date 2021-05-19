@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { EndscreenComponent } from './endscreen/endscreen.component';
 
 
 
@@ -32,7 +33,8 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     PlayerComponent,
     DialogAddPlayerComponent,
     GameInfoComponent,
-    EditPlayerComponent
+    EditPlayerComponent,
+    EndscreenComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),      //Angular Firebase importieren
