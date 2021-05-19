@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Delete this player?</h1>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No thanks</button>
+    <!-- Die Variable player wird bei Klick auf diesen Button als result zurückgegeben. -->
+    <button mat-button [mat-dialog-close]="'DELETE'" color="warn">Delete Player</button>
+</div>

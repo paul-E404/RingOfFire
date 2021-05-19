@@ -2,11 +2,16 @@
     display: flex;
     align-items: center;
     width: 100%;
-    background-color: rgba(69, 15, 219, 0.3);
+    background-color: rgba(69, 15, 255, 0.5);
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     margin-bottom: 16px;
     filter: brightness(0.9);
+    cursor: pointer;
+
+    -webkit-transition: all 225ms ease-in-out;
+    -moz-transition: all 225ms ease-in-out;
+    -o-transition: all 225ms ease-in-out;
     transition: all 225ms ease-in-out;
 
     img {
@@ -27,8 +32,13 @@
 
 .player-active {
     width: 115%;
+    background-color: rgba(69, 15, 255, 0.6) !important;
     box-shadow: 0 0 5px white;
     filter: brightness(1) !important;
+
+    -webkit-transition: all 225ms ease-in-out;
+    -moz-transition: all 225ms ease-in-out;
+    -o-transition: all 225ms ease-in-out;
     transition: all 225ms ease-in-out;
 }
 

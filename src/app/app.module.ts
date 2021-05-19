@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 
 
@@ -30,7 +31,8 @@ import { MatCardModule } from '@angular/material/card';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    EditPlayerComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),      //Angular Firebase importieren

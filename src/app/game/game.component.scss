@@ -26,6 +26,9 @@
 
 .top-card {
     cursor: pointer;
+    -webkit-transition: all 225ms ease-in-out;
+    -moz-transition: all 225ms ease-in-out;
+    -o-transition: all 225ms ease-in-out;
     transition: all 225ms ease-in-out;
     z-index: 1; //alternative: redo order of img tags in game.component.html
 }
@@ -38,7 +41,11 @@
 }
 
 .picked-card {
+    -webkit-animation: picked-card-animation 3s ease-in-out;
+    -moz-animation: picked-card-animation 3s ease-in-out;
+    -o-animation: picked-card-animation 3s ease-in-out;
     animation: picked-card-animation 3s ease-in-out;
+
     animation-fill-mode: forwards;
 }
 
