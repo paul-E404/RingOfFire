@@ -8,10 +8,11 @@ export class Game {
     public currentPlayer: number = 0;
     public currentCard: string = 'red_back';
     public cardIsTaken = false;
+    public gameOver = false;
 
     //Der Konstruktor ist die erste Methode die bei Instanziierung eines Objektes (Erstellung eines Objektes mit ...= new Classname) aufgerufen wird.
     constructor() {
-        for (let i = 2; i < 15; i++) {
+        for (let i = 2; i < 3; i++) {
             this.stack.push(i + '_C');
             this.stack.push(i + '_D');
             this.stack.push(i + '_H');

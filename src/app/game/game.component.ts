@@ -17,7 +17,7 @@ export class GameComponent implements OnInit {
     cardIsTaken = false; */
   game: Game;
   gameId: string;
-  gameOver: boolean = false;
+  /* gameOver: boolean = false; */
   
 
   players = [];
@@ -66,7 +66,8 @@ export class GameComponent implements OnInit {
       this.saveGame();
       if (this.game.stack.length == 0) {
         console.log("this.game.stack.length", this.game.stack.length);
-        this.gameOver = true;
+        this.game.gameOver = true;
+        this.saveGame();
       }
     }, 3000)
   }

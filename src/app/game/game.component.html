@@ -7,7 +7,7 @@
             <mat-icon>add</mat-icon>
         </button>
     </div>
-    <div *ngIf="!gameOver" class="card-deck">
+    <div *ngIf="!game.gameOver" class="card-deck">
 
         <!-- CARD STACK -->
         <!-- for-Schleife -->
@@ -16,7 +16,7 @@
             src="assets/img/cards/red_back.png" alt="card-deck">
 
         <!-- CURRENT CARD (Animation) -->
-        <img (click)="takeCard()" [ngStyle]="{'bottom.px': 51 + game.stack.length * 1}" class="top-card"
+        <img (click)="takeCard()" [ngStyle]="{'bottom.px': 51 + game.stack.length}" class="top-card"
             [class.picked-card]="game.cardIsTaken" src="assets/img/cards/{{ game.currentCard }}.png" alt="top-card">
 
         <!-- STACK WITH PLAYED CARDS -->
@@ -27,10 +27,10 @@
     </div>
 
     <!-- Preload next card image -->
-    <img class="preloadedImage" src="assets/img/cards/{{ game.stack[game.stack.length - 1] }}.png" alt="">
+    <img *ngIf="game.stack.length != 0" class="preloadedImage" src="assets/img/cards/{{ game.stack[game.stack.length - 1] }}.png" alt="">
 
     <app-game-info [card]="game.currentCard"></app-game-info>
 
-    <app-endscreen *ngIf="gameOver"></app-endscreen>
+    <app-endscreen *ngIf="game.gameOver"></app-endscreen>
 
 </div>
