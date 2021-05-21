@@ -31,6 +31,6 @@
 
     <app-game-info [card]="game.currentCard"></app-game-info>
 
-    <app-endscreen *ngIf="game.gameOver"></app-endscreen>
+    <app-endscreen (restartButtonClicked)="playAnotherRound()" *ngIf="game.gameOver"></app-endscreen>
 
 </div>

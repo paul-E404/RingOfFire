@@ -43,7 +43,7 @@ export class Player {
 
 
 //Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-function shuffle(array: string[]) {
+export function shuffle(array: string[]) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
     // While there remain elements to shuffle...

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/models/game';
+import { Game, shuffle } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
 
   game: Game;
   gameId: string;
-  
+
   players = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
@@ -46,7 +46,7 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    
+
     if (!this.game.cardIsTaken) {
       this.game.cardIsTaken = true;
       this.game.currentCard = this.game.stack.pop();
@@ -84,15 +84,15 @@ export class GameComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-      if(result) {
-        if(result.name && result.avatarSrc) {
+      if (result) {
+        if (result.name && result.avatarSrc) {
           this.game.players.push(result);
           console.log("players array: ", this.game.players);
           console.log("this.game", this.game);
           this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
         }
       }
-     
+
     });
   }
 
@@ -102,7 +102,7 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(EditPlayerComponent);
 
     dialogRef.afterClosed().subscribe(change => {
-      if(change == 'DELETE') {
+      if (change == 'DELETE') {
         this.game.players.splice(playerId, 1);
         this.saveGame();
       }
@@ -117,5 +117,24 @@ export class GameComponent implements OnInit {
       .doc(this.gameId)             //Im Dokument der Sammlung mit der betreffenden ID
       /* .update(this.game.toJSON()); */                //Wird das aktualisierte JSON-Objekt gespeichert. (Junus Lösung)
       .update(JSON.parse(JSON.stringify(this.game)));   //Lösung Stackoverflow (mit dieser Lösung kann das Player Objekt mit new Player erstellt werden!)
+  }
+
+
+  playAnotherRound() {
+    for (let i = 2; i < 15; i++) {
+      this.game.stack.push(i + '_C');
+      this.game.stack.push(i + '_D');
+      this.game.stack.push(i + '_H');
+      this.game.stack.push(i + '_S');
+    }
+
+    shuffle(this.game.stack);
+
+    this.game.currentCard = 'red_back';
+    this.game.playedCards = [];
+    this.game.gameOver = false;
+    this.game.cardIsTaken = false;
+
+    this.saveGame();
   }
 }
