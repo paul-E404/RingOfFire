@@ -13,13 +13,9 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 })
 export class GameComponent implements OnInit {
 
-  /*   currentCard: string = 'red_back';
-    cardIsTaken = false; */
   game: Game;
   gameId: string;
-  /* gameOver: boolean = false; */
   
-
   players = [];
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
@@ -44,6 +40,7 @@ export class GameComponent implements OnInit {
           this.game.currentPlayer = game.currentPlayer;
           this.game.currentCard = game.currentCard;
           this.game.cardIsTaken = game.cardIsTaken;
+          this.game.gameOver = game.gameOver;
         });
     })
   }
