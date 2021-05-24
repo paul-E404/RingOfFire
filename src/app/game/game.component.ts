@@ -15,6 +15,7 @@ export class GameComponent implements OnInit {
 
   game: Game;
   gameId: string;
+  stackReleased: boolean = false;
 
   players = [];
 
@@ -45,28 +46,29 @@ export class GameComponent implements OnInit {
     })
   }
 
-  takeCard() {
+  releaseStack() {
+    this.stackReleased = true;
+  }
 
-    if (!this.game.cardIsTaken) {
-      this.game.cardIsTaken = true;
-      this.game.currentCard = this.game.stack.pop();
-      this.saveGame();
-    }
-    setTimeout(() => {
-      this.game.playedCards.push(this.game.currentCard);
-      if (this.game.stack.length > 0) {
-        this.game.cardIsTaken = false;
-        this.game.currentCard = 'red_back';
-      }
-      this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      this.saveGame();
-      if (this.game.stack.length == 0) {
-        console.log("this.game.stack.length", this.game.stack.length);
-        this.game.gameOver = true;
+  takeCard() {
+    if (this.stackReleased) {
+      if (!this.game.cardIsTaken) {
+        this.game.cardIsTaken = true;
+        this.game.currentCard = this.game.stack.pop();
         this.saveGame();
       }
-    }, 3000)
+      setTimeout(() => {
+        this.game.playedCards.push(this.game.currentCard);
+        if (this.game.stack.length > 0) {
+          this.game.cardIsTaken = false;
+          this.game.currentCard = 'red_back';
+        }
+        this.game.currentPlayer++;
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+        this.saveGame();
+        this.checkForGameOver();
+      }, 3000)
+    }
   }
 
   newGame() {
@@ -77,6 +79,13 @@ export class GameComponent implements OnInit {
       .firestore
       .collection('games')
       .add(this.game.toJSON()); */
+  }
+
+  checkForGameOver() {
+    if (this.game.stack.length == 0) {
+      this.game.gameOver = true;
+      this.saveGame();
+    }
   }
 
   openDialog(): void {

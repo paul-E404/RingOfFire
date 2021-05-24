@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-info',
@@ -27,6 +27,8 @@ export class GameInfoComponent implements OnInit, OnChanges {
   description = '';
 
   @Input() card: string;
+  @Input() atLeastOnePlayerCreated = false;
+  @Output() ableToTakeFirstCard = new EventEmitter();
 
   constructor() { }
 
@@ -35,6 +37,11 @@ export class GameInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    if(this.atLeastOnePlayerCreated) {
+      this.title = "Take a card!";
+      this.description = "Click on the card stack to pick a card.";
+      this.ableToTakeFirstCard.emit();
+    }
     console.log("Current card is:", this.card);
     if (this.card !== "red_back") {
       let cardNumber = +this.card.split("_")[0];
