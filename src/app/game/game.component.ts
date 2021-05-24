@@ -100,6 +100,8 @@ export class GameComponent implements OnInit {
   editPlayer(playerId: number) {
     console.log("playerId", playerId);
     const dialogRef = this.dialog.open(EditPlayerComponent);
+    //Name des Spielers im Delete-Dialog anzeigen:
+    dialogRef.componentInstance.player = this.game.players[playerId];
 
     dialogRef.afterClosed().subscribe(change => {
       if (change == 'DELETE') {
