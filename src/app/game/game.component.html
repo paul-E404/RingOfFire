@@ -31,6 +31,6 @@
 
     <app-game-info [atLeastOnePlayerCreated]="game.players.length > 0" (ableToTakeFirstCard)="releaseStack()" [card]="game.currentCard"></app-game-info>
 
-    <app-endscreen (restartButtonClicked)="playAnotherRound()" *ngIf="game.gameOver"></app-endscreen>
+    <app-endscreen [whoopSound]="AUDIO_WHOOP" (restartButtonClicked)="playAnotherRound()" *ngIf="game.gameOver"></app-endscreen>
 
 </div>

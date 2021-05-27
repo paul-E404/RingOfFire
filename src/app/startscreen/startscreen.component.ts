@@ -10,6 +10,8 @@ import { Game } from 'src/models/game';
 })
 export class StartscreenComponent implements OnInit {
 
+  AUDIO_SHUFFLE_CARDS = new Audio('assets/audio/shuffle_cards.mp3');
+
   //private, da wir den Router nur innerhalb der Komponente verwenden wollen
   //public wenn wir den Router auch in der index.html verwenden möchten
   constructor (private firestore: AngularFirestore, private router: Router) { }
@@ -19,6 +21,7 @@ export class StartscreenComponent implements OnInit {
 
   startGame() {
     let game = new Game();      //Beim Klick auf "Start Game" wird eine neues Game Objekt gestartet.
+    this.AUDIO_SHUFFLE_CARDS.play();
 
     this                        //Dieses Game Objekt wird in ein JSON Objekt umgewandelt und in der Collection "games" gespeichert.
       .firestore

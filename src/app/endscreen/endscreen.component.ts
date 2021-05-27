@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class EndscreenComponent implements OnInit {
 
+  @Input() whoopSound;
   @Output() restartButtonClicked = new EventEmitter();
 
   constructor(private router: Router) { }
@@ -16,10 +17,12 @@ export class EndscreenComponent implements OnInit {
   }
 
   goBackToStartscreen() {
+    this.whoopSound.play();
     this.router.navigateByUrl('/');
   }
 
   playAnotherRound() {
+    this.whoopSound.play();
     this.restartButtonClicked.emit();
   }
 

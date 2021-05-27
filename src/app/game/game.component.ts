@@ -19,6 +19,11 @@ export class GameComponent implements OnInit {
 
   players = [];
 
+  AUDIO_WHOOP = new Audio('assets/audio/whoop.mp3');
+  AUDIO_TAKE_CARD = new Audio('assets/audio/take_card.mp3');
+  AUDIO_PLACE_CARD = new Audio('assets/audio/place_card.mp3');
+  AUDIO_ENDSCREEN_SONG = new Audio('assets/audio/endscreen_song.mp3');
+
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -53,10 +58,14 @@ export class GameComponent implements OnInit {
   takeCard() {
     if (this.stackReleased) {
       if (!this.game.cardIsTaken) {
+        this.AUDIO_TAKE_CARD.play();
         this.game.cardIsTaken = true;
         this.game.currentCard = this.game.stack.pop();
         this.saveGame();
       }
+      setTimeout(() => {
+        this.AUDIO_PLACE_CARD.play();
+      }, 2500)
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
         if (this.game.stack.length > 0) {
@@ -85,10 +94,12 @@ export class GameComponent implements OnInit {
     if (this.game.stack.length == 0) {
       this.game.gameOver = true;
       this.saveGame();
+      this.AUDIO_ENDSCREEN_SONG.play();
     }
   }
 
   openDialog(): void {
+    this.AUDIO_WHOOP.play();
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -132,6 +143,9 @@ export class GameComponent implements OnInit {
 
 
   playAnotherRound() {
+
+    this.AUDIO_ENDSCREEN_SONG.pause();
+
     for (let i = 2; i < 15; i++) {
       this.game.stack.push(i + '_C');
       this.game.stack.push(i + '_D');
