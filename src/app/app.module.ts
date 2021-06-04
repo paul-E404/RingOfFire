@@ -22,6 +22,8 @@ import { GameInfoComponent } from './game-info/game-info.component';
 import { MatCardModule } from '@angular/material/card';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { EndscreenComponent } from './endscreen/endscreen.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -34,7 +36,9 @@ import { EndscreenComponent } from './endscreen/endscreen.component';
     DialogAddPlayerComponent,
     GameInfoComponent,
     EditPlayerComponent,
-    EndscreenComponent
+    EndscreenComponent,
+    LegalNoticeComponent,
+    FooterComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),      //Angular Firebase importieren
