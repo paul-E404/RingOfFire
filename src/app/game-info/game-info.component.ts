@@ -27,6 +27,7 @@ export class GameInfoComponent implements OnInit, OnChanges {
   description = '';
 
   @Input() card: string;
+  @Input() currentStackLength: number;
   @Input() atLeastOnePlayerCreated = false;
   @Output() ableToTakeFirstCard = new EventEmitter();
 
@@ -37,7 +38,8 @@ export class GameInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if(this.atLeastOnePlayerCreated) {
+    if(this.atLeastOnePlayerCreated && this.currentStackLength == 52) {
+      console.log("this.currentStackLength", this.currentStackLength);
       this.title = "Take a card!";
       this.description = "Click on the card stack to pick a card.";
       this.ableToTakeFirstCard.emit();

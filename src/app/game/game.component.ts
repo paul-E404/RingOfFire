@@ -19,6 +19,7 @@ export class GameComponent implements OnInit {
 
   players = [];
 
+  AUDIO_SHUFFLE_CARDS = new Audio('assets/audio/shuffle_cards.mp3');
   AUDIO_WHOOP = new Audio('assets/audio/whoop.mp3');
   AUDIO_TAKE_CARD = new Audio('assets/audio/take_card.mp3');
   AUDIO_PLACE_CARD = new Audio('assets/audio/place_card.mp3');
@@ -145,6 +146,7 @@ export class GameComponent implements OnInit {
   playAnotherRound() {
 
     this.AUDIO_ENDSCREEN_SONG.pause();
+    this.AUDIO_SHUFFLE_CARDS.play();
 
     for (let i = 2; i < 15; i++) {
       this.game.stack.push(i + '_C');

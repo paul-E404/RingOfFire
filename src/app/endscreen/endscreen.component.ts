@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class EndscreenComponent implements OnInit {
 
-  @Input() whoopSound;
+  @Input() shuffleCardsSound;
   @Output() restartButtonClicked = new EventEmitter();
 
   constructor(private router: Router) { }
@@ -17,12 +17,11 @@ export class EndscreenComponent implements OnInit {
   }
 
   goBackToStartscreen() {
-    this.whoopSound.play();
     this.router.navigateByUrl('/');
   }
 
   playAnotherRound() {
-    this.whoopSound.play();
+    this.shuffleCardsSound.play();
     this.restartButtonClicked.emit();
   }
 

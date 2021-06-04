@@ -12,7 +12,7 @@ export class Game {
 
     //Der Konstruktor ist die erste Methode die bei Instanziierung eines Objektes (Erstellung eines Objektes mit ...= new Classname) aufgerufen wird.
     constructor() {
-        for (let i = 2; i < 3; i++) {
+        for (let i = 2; i < 15; i++) {
             this.stack.push(i + '_C');
             this.stack.push(i + '_D');
             this.stack.push(i + '_H');

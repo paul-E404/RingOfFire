@@ -6,6 +6,12 @@ body {
 
 html, body { height: 100%; }
 
+.preloadedImage {
+    z-index: -999;
+    width: 0;
+    height: 0;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .cdk-overlay-pane {

@@ -59,7 +59,7 @@
 @media(max-width: 500px) {
     .endscreen-container {
         top: 30vh;
-        bottom: 5vh;
+        bottom: 0 !important;
     }
 }
 
