@@ -3,7 +3,7 @@
     top: 2%;
     right: 25%;
     left: 25%;
-    opacity: 0.9;  
+    opacity: 0.9;
     z-index: 1;
 }
 
@@ -11,37 +11,35 @@
     font-size: 18px !important;
 }
 
-
-
 /* RESPONSIVE DESGIN */
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
     .game-info-box {
         right: 10% !important;
         left: 30% !important;
     }
 }
 
-@media(max-width: 1000px) {
+@media (max-width: 1000px) {
     .game-info-box {
         right: 5% !important;
         left: 35% !important;
     }
 }
 
-@media(max-width: 850px) {
+@media (max-width: 850px) {
     .game-info-box {
         left: 45% !important;
     }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
     .mat-card-content {
         font-size: 16px !important;
     }
 }
 
-@media(max-width: 450px) {
+@media (max-width: 450px) {
     .game-info-box {
         left: 50% !important;
     }
@@ -50,16 +48,11 @@
     }
 }
 
-@media(max-width: 350px) {
+@media (max-width: 350px) {
     .mat-card-title {
         font-size: 16px !important;
     }
     .mat-card-content {
         font-size: 14px !important;
     }
-        
 }
-
-
-
-

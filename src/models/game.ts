@@ -1,6 +1,3 @@
-//Object (Model): Was drin stehen darf ist vorab definiert, im Gegensatz zu einem JSON.
-//Nach : steht der Datentyp, z.B. string[] => ein Array aus Strings
-
 export class Game {
     public players: string[] = [];
     public stack: string[] = [];
@@ -10,7 +7,6 @@ export class Game {
     public cardIsTaken = false;
     public gameOver = false;
 
-    //Der Konstruktor ist die erste Methode die bei Instanziierung eines Objektes (Erstellung eines Objektes mit ...= new Classname) aufgerufen wird.
     constructor() {
         for (let i = 2; i < 15; i++) {
             this.stack.push(i + '_C');
@@ -22,7 +18,7 @@ export class Game {
         shuffle(this.stack);
     }
 
-    //Umwandlung von einem Game-Objekt in ein JSON-Objekt damit dieses in der Firebase Datenbank gespeichert werden kann
+    //Umwandlung von einem Game-Objekt in ein JSON-Objekt damit dieses in der Firebase Datenbank gespeichert werden kann (Lösung Junus Ergin)
    /*  public toJSON() {
         return {
             players: this.players,
@@ -31,7 +27,6 @@ export class Game {
             currentPlayer: this.currentPlayer,
             currentCard: this.currentCard,
             cardIsTaken: this.cardIsTaken
-
         };
     } */
 }
@@ -40,7 +35,6 @@ export class Player {
     public name: string = '';
     public avatarSrc: string = '';
 }
-
 
 //Source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 export function shuffle(array: string[]) {

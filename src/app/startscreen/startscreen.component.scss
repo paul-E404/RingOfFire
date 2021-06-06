@@ -32,7 +32,6 @@
         width: 100%;
         margin-bottom: 24px;
 
-        /* background: rgba(0, 204, 255, 0.4); */
         background: linear-gradient(rgba(153, 228, 247, 0.4), rgba(59, 212, 250, 0.4), rgba(0, 143, 179, 0.4));
         border-radius: 50%;
         box-shadow: 0 4px 6px lightblue;
@@ -83,13 +82,17 @@
         max-height: unset;
     }
     .letters {
-        background: linear-gradient(rgba(153, 228, 247, 0.8), rgba(59, 212, 250, 0.8), rgba(0, 143, 179, 0.8)) !important;
+        background: linear-gradient(
+            rgba(153, 228, 247, 0.8),
+            rgba(59, 212, 250, 0.8),
+            rgba(0, 143, 179, 0.8)
+        ) !important;
     }
 }
 
 @media (max-width: 500px) {
     .startscreen img {
-       max-height: unset;
-       height: 100vh;
+        max-height: unset;
+        height: 100vh;
     }
 }

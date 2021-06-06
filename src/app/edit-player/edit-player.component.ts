@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog'; 
 
 @Component({
@@ -8,12 +8,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class EditPlayerComponent implements OnInit {
 
-  //Um Name des Spielers im Delete-Dialog anzuzeigen
+  //To be able to display the selected player's name, the variable player needs to be declarated here.
   player: any;
 
-  constructor(public dialogRef: MatDialogRef<EditPlayerComponent>) { 
-    
-  }
+  constructor(public dialogRef: MatDialogRef<EditPlayerComponent>) { }
 
   ngOnInit(): void {
   }

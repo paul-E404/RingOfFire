@@ -13,17 +13,7 @@ export class PlayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    /* this.newPlayer(); */
+  
   }
-
-/*   newPlayer() {
-    this.player = new Player();
-    this.player.name = this.name;
-    this.player.playerActive = this.playerActive;
-    this.player.avatarSrc = this.avatarSrc;
-    console.log("player in der player.component.ts", this.player);
-  }
- */
-
 
 }

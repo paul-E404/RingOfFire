@@ -1,6 +1,6 @@
 <div class="field">
     <div class="player-section">
-        <!-- [player] ist die @Input-Variable aus der player.components.ts -->
+        <!-- [player] is the @Input-param from player.components.ts -->
         <app-player (click)="editPlayer(i)" *ngFor="let player of game.players, let i = index;" [player]="player" [playerActive]="i == game.currentPlayer">
         </app-player>
         <button *ngIf="game.players.length < 9" (click)="openDialog()" mat-fab color="primary" class="btn-add">
@@ -10,8 +10,6 @@
     <div *ngIf="!game.gameOver" class="card-deck">
 
         <!-- CARD STACK -->
-        <!-- for-Schleife -->
-        <!-- c ist eine Variable, die durch ein Array iteriert (die Einträge im Array sind willkürlich)-->
         <img *ngFor="let c of game.stack; let i = index;" [ngStyle]="{'bottom.px': 50 + i * 1}"
             src="assets/img/cards/red_back.png" alt="card-deck">
 
@@ -20,7 +18,7 @@
             [class.picked-card]="game.cardIsTaken" src="assets/img/cards/{{ game.currentCard }}.png" alt="top-card">
 
         <!-- STACK WITH PLAYED CARDS -->
-        <!-- card ist hier eine willkürlich gesetzte Variable, die durch das Array game.playedCards iteriert -->
+        <!-- card is a randomly set variable which iterates through the game.playedCards array -->
         <img *ngFor="let card of game.playedCards; let i = index" [ngStyle]="{'bottom.px': 102 + i * 1}"
             class="played-card" src="assets/img/cards/{{ card }}.png" alt="card-deck-picked">
 

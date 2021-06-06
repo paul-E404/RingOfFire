@@ -6,7 +6,7 @@ import { StartscreenComponent } from './startscreen/startscreen.component';
 
 const routes: Routes = [
   {path: '', component: StartscreenComponent},
-  {path: 'game/:id', component: GameComponent},      //: bedeutet, dass diese Router über eine Variable verfügt
+  {path: 'game/:id', component: GameComponent},
   {path: 'legal-notice', component: LegalNoticeComponent}
 ];
 

@@ -39,10 +39,9 @@
     }
 }
 
-
 /* RESPONSIVE DESIGN */
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
     .endscreen-btn-container {
         flex-direction: column;
         width: unset !important;
@@ -56,16 +55,15 @@
     }
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
     .endscreen-container {
         top: 30vh;
         bottom: 0 !important;
     }
 }
 
-@media(max-width: 400px) {
+@media (max-width: 400px) {
     .endscreen-container {
         top: 40vh;
     }
 }
-

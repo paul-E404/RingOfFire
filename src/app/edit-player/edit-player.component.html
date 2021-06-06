@@ -2,6 +2,6 @@
 <img class="edit-player-avatar" src="assets/img/avatars/{{ player.avatarSrc }}" alt="player-avatar">
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No thanks</button>
-    <!-- Die Variable player wird bei Klick auf diesen Button als result zurückgegeben. -->
+    <!-- [mat-dialog-close]="'DELETE'": The string 'DELETE' is given back as the result in editPlayer() function (game.component.ts) -->
     <button mat-button [mat-dialog-close]="'DELETE'" color="warn">Delete Player</button>
 </div>

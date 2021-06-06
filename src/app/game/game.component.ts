@@ -17,8 +17,6 @@ export class GameComponent implements OnInit {
   gameId: string;
   stackReleased: boolean = false;
 
-  players = [];
-
   AUDIO_SHUFFLE_CARDS = new Audio('assets/audio/shuffle_cards.mp3');
   AUDIO_WHOOP = new Audio('assets/audio/whoop.mp3');
   AUDIO_TAKE_CARD = new Audio('assets/audio/take_card.mp3');
@@ -30,57 +28,28 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe(() => {
-      console.log(this.route.params['_value'].id);   //id aus der URL holen
-      this.gameId = this.route.params['_value'].id;
+      //Get id from URL
+      this.gameId = this.route.params['_value'].id; 
 
-      //DATENBANK ABONNIEREN - um die aktuellen Daten abzurufen!
+      //Subscribe database - to get the current data.
       this
         .firestore
-        .collection('games')                    //Name der Sammlung im Cloud Firestore: "games"
-        .doc(this.gameId)    //Dokument in der Collection mit der entsprechenden ID aufrufen
+        //games: name of the collection in cloud firestore
+        .collection('games')
+        //Call document of the collection 'games' with the corresponding ID
+        .doc(this.gameId)
         .valueChanges()
-        .subscribe((game: any) => {                  //game wird abonniert, d.h.
-          console.log("Game update", game);     //...jedesmal, wenn ich in in der Datenbank etwas ändere, wird diese Änderung ausgelogged.
-          this.game.players = game.players;     //Alle Variablen in unserem JSON updaten.
-          this.game.stack = game.stack;
-          this.game.playedCards = game.playedCards;
-          this.game.currentPlayer = game.currentPlayer;
-          this.game.currentCard = game.currentCard;
-          this.game.cardIsTaken = game.cardIsTaken;
-          this.game.gameOver = game.gameOver;
+        //game is subscribed: that means everytime something changes in the database, this change is logged out
+        .subscribe((game: any) => {             
+          //console.log("Game update", game);
+          this.updateGameJSON(game);
         });
     })
   }
 
-  releaseStack() {
-    this.stackReleased = true;
-  }
-
-  takeCard() {
-    if (this.stackReleased) {
-      if (!this.game.cardIsTaken) {
-        this.AUDIO_TAKE_CARD.play();
-        this.game.cardIsTaken = true;
-        this.game.currentCard = this.game.stack.pop();
-        this.saveGame();
-      }
-      setTimeout(() => {
-        this.AUDIO_PLACE_CARD.play();
-      }, 2500)
-      setTimeout(() => {
-        this.game.playedCards.push(this.game.currentCard);
-        if (this.game.stack.length > 0) {
-          this.game.cardIsTaken = false;
-          this.game.currentCard = 'red_back';
-        }
-        this.game.currentPlayer++;
-        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-        this.saveGame();
-        this.checkForGameOver();
-      }, 3000)
-    }
-  }
-
+  /**
+   * Generates a new game.
+   */
   newGame() {
     this.game = new Game();
 
@@ -91,6 +60,67 @@ export class GameComponent implements OnInit {
       .add(this.game.toJSON()); */
   }
 
+  /**
+   * Updates all variables in 'game' JSON.
+   * @param  {any} game JSON with all current game data from database.
+   */
+  updateGameJSON(game: any) {
+    this.game.players = game.players; 
+    this.game.stack = game.stack;
+    this.game.playedCards = game.playedCards;
+    this.game.currentPlayer = game.currentPlayer;
+    this.game.currentCard = game.currentCard;
+    this.game.cardIsTaken = game.cardIsTaken;
+    this.game.gameOver = game.gameOver;
+  }
+
+  /**
+   * Make drawing a card possible as soon as one player has been created at least.
+   */
+  releaseStack() {
+    this.stackReleased = true;
+  }
+
+  /**
+   * Let the player take a card and manages audio sounds.
+   */
+  takeCard() {
+    if (this.stackReleased) {
+      if (!this.game.cardIsTaken) {
+        this.AUDIO_TAKE_CARD.play();
+        this.game.cardIsTaken = true;
+        //Remove card from stack array
+        this.game.currentCard = this.game.stack.pop();
+        this.saveGame();
+      }
+      setTimeout(() => {
+        this.AUDIO_PLACE_CARD.play();
+      }, 2500)
+      setTimeout(() => {
+        //Add card to played cards array
+        this.game.playedCards.push(this.game.currentCard);
+        if (this.game.stack.length > 0) {
+          this.game.cardIsTaken = false;
+          this.game.currentCard = 'red_back';
+        }
+        this.selectNextPlayer();
+        this.saveGame();
+        this.checkForGameOver();
+      }, 3000)
+    }
+  }
+
+  /**
+   * Selects next player.
+   */
+  selectNextPlayer() {
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+  }
+
+  /**
+   * Checks for game over for possibly playing the endscreen song.
+   */
   checkForGameOver() {
     if (this.game.stack.length == 0) {
       this.game.gameOver = true;
@@ -99,55 +129,82 @@ export class GameComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens a dialog for showing AddPlayerComponent and saves new generated player to game JSON after closing.
+   * @returns void
+   */
   openDialog(): void {
     this.AUDIO_WHOOP.play();
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      //console.log('The dialog was closed, the created player is:', result);
       if (result) {
         if (result.name && result.avatarSrc) {
+          //Add created player to existing players
           this.game.players.push(result);
-          console.log("players array: ", this.game.players);
-          console.log("this.game", this.game);
-          this.saveGame();                //Spiel updaten --> aktuelle Daten zur Datenbank hinzufügen
+          this.saveGame();
         }
       }
-
     });
   }
 
-
+  /**
+   * Opens a dialog with the option to delete the selected player.
+   * @param  {number} playerId The player's ID.
+   */
   editPlayer(playerId: number) {
-    console.log("playerId", playerId);
     const dialogRef = this.dialog.open(EditPlayerComponent);
-    //Name des Spielers im Delete-Dialog anzeigen:
+    //Show player's name in edit-player-dialog
     dialogRef.componentInstance.player = this.game.players[playerId];
 
     dialogRef.afterClosed().subscribe(change => {
       if (change == 'DELETE') {
+        //Delete player from players array
         this.game.players.splice(playerId, 1);
         this.saveGame();
       }
     });
   }
 
-
+  /**
+   * Saves current game data to game JSON at firestore database.
+   */
   saveGame() {
     this
       .firestore
-      .collection('games')          //Name der Sammlung im Cloud Firestore: "games"
-      .doc(this.gameId)             //Im Dokument der Sammlung mit der betreffenden ID
-      /* .update(this.game.toJSON()); */                //Wird das aktualisierte JSON-Objekt gespeichert. (Junus Lösung)
+      //games: name of the collecction at cloud firestore
+      .collection('games')
+      //document of the collection with the corresponding ID
+      .doc(this.gameId)
+      /* .update(this.game.toJSON()); */                //Alternative (Junus Ergin)
+      //Save JSON to firestore (Stackoverflow)
       .update(JSON.parse(JSON.stringify(this.game)));   //Lösung Stackoverflow (mit dieser Lösung kann das Player Objekt mit new Player erstellt werden!)
   }
 
-
+  /**
+   * Restarts the game with the same players.
+   */
   playAnotherRound() {
 
     this.AUDIO_ENDSCREEN_SONG.pause();
     this.AUDIO_SHUFFLE_CARDS.play();
 
+    this.refillStack();
+
+    this.game.currentCard = 'red_back';
+    this.game.playedCards = [];
+    this.game.gameOver = false;
+    this.game.cardIsTaken = false;
+
+    this.saveGame();
+    
+  }
+
+  /**
+   * Refills the empty stack with new shuffled cards.
+   */
+  refillStack() {
     for (let i = 2; i < 15; i++) {
       this.game.stack.push(i + '_C');
       this.game.stack.push(i + '_D');
@@ -156,12 +213,6 @@ export class GameComponent implements OnInit {
     }
 
     shuffle(this.game.stack);
-
-    this.game.currentCard = 'red_back';
-    this.game.playedCards = [];
-    this.game.gameOver = false;
-    this.game.cardIsTaken = false;
-
-    this.saveGame();
   }
+
 }

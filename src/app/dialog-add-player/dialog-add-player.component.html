@@ -3,13 +3,12 @@
   <p>Enter the player's name:</p>
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <!-- Was in das Input Feld eingegeben wird, wird an die Variable name gebunden. -->
-  <!--   <input matInput [(ngModel)]="name" maxlength="10"> -->
-  <input matInput [(ngModel)]="player.name" maxlength="10">
+    <input matInput [(ngModel)]="player.name" maxlength="10">
   </mat-form-field>
   <p>Choose a profile picture:</p>
   <div class="avatars-container">
-    <div (click)="setAvatar(avatarSrc, i)" [class.highlight-avatar]="i == clickedAvatarNumber" *ngFor="let avatarSrc of avatarSources; let i = index;" class="avatar-box">
+    <div (click)="setAvatar(avatarSrc, i)" [class.highlight-avatar]="i == clickedAvatarNumber"
+      *ngFor="let avatarSrc of avatarSources; let i = index;" class="avatar-box">
       <img class="avatar" src="assets/img/avatars/{{ avatarSrc }}" alt="avatar">
       <img *ngIf="i == clickedAvatarNumber" class="check-icon" src="assets/img/avatars/check.png" alt="check-icon">
     </div>
@@ -18,6 +17,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <!-- Die Variable player wird bei Klick auf diesen Button als result zurückgegeben. -->
+  <!-- [mat-dialog-close]="player": The variable player is given back as the result in openDialog() method (game.component.ts) -->
   <button mat-button [disabled]="player.name.length == 0 || !player.avatarSrc" [mat-dialog-close]="player">Ok</button>
 </div>

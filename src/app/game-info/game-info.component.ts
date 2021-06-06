@@ -34,24 +34,37 @@ export class GameInfoComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("card beträgt", this.card);
+
   }
 
   ngOnChanges(): void {
-    if(this.atLeastOnePlayerCreated && this.currentStackLength == 52) {
-      console.log("this.currentStackLength", this.currentStackLength);
-      this.title = "Take a card!";
-      this.description = "Click on the card stack to pick a card.";
-      this.ableToTakeFirstCard.emit();
+    
+    if (this.atLeastOnePlayerCreated && this.currentStackLength == 52) {
+      this.promptUserToTakeFirstCard();
     }
-    console.log("Current card is:", this.card);
+
     if (this.card !== "red_back") {
-      let cardNumber = +this.card.split("_")[0];
-      console.log("Gesplitteter String:", this.card.split("_"));
-      this.title = this.cardRules[cardNumber-2].title;
-      this.description = this.cardRules[cardNumber-2].description;
-      console.log("title: ", this.title, "description", this.description);
+      this.showCardRule();
     }
+
+  }
+
+  /**
+   * Prompts the user to take the first card.
+   */
+  promptUserToTakeFirstCard() {
+    this.title = "Take a card!";
+    this.description = "Click on the card stack to pick a card.";
+    this.ableToTakeFirstCard.emit();
+  }
+
+  /**
+   * Shows rule of the current card in the info box.
+   */
+  showCardRule() {
+    let cardNumber = +this.card.split("_")[0];
+    this.title = this.cardRules[cardNumber - 2].title;
+    this.description = this.cardRules[cardNumber - 2].description;
   }
 
 }

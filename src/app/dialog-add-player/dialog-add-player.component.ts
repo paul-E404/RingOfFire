@@ -10,31 +10,30 @@ import { Player } from 'src/models/game';
 export class DialogAddPlayerComponent implements OnInit {
 
   avatarSources: string[] = ['ava1.png', 'ava2.png', 'ava3.png', 'ava4.png', 'ava5.png', 'ava6.png', 'ava7.png', 'ava8.png', 'ava9.png'];
-  player: any;
+  player: Player;
   clickedAvatarNumber: number;
   
   constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
 
   ngOnInit(): void {
-    this.player = new Player();         //Neues Objekt von Typ Player erzeugen
-    console.log("this.player", this.player);
-    /* this.player = {
-      name: "",
-      avatarSrc: ""
-    }; */
-    
+    //Create a new object from type Player when opening dialog
+    this.player = new Player();
   }
 
+  /**
+   * Closes the dialog when the user chlicks on "No Thanks" button.
+   */
   onNoClick() {
     this.dialogRef.close();
   }
 
-  setAvatar(src: string, i: number) {
-    this.player.avatarSrc = src;
-    console.log("this.player.avatarSrc", this.player.avatarSrc);
+  /**
+   * @param  {string} avatarSrc Source of the clicked avatar.
+   * @param  {number} i Index of clicked avatar.
+   */
+  setAvatar(avatarSrc: string, i: number) {
+    this.player.avatarSrc = avatarSrc;
     this.clickedAvatarNumber = i;
-    console.log("this.clickedAvatarNumber", this.clickedAvatarNumber);
   }
-
 
 }

@@ -12,28 +12,31 @@ export class StartscreenComponent implements OnInit {
 
   AUDIO_SHUFFLE_CARDS = new Audio('assets/audio/shuffle_cards.mp3');
 
-  //private, da wir den Router nur innerhalb der Komponente verwenden wollen
-  //public wenn wir den Router auch in der index.html verwenden möchten
-  constructor (private firestore: AngularFirestore, private router: Router) { }
+  //private because we want to use router only within this component
+  //public if we would like to use router e.g. in the index.html, too
+  constructor(private firestore: AngularFirestore, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   startGame() {
-    let game = new Game();      //Beim Klick auf "Start Game" wird eine neues Game Objekt gestartet.
+    //A new game object is created by clicking on "Start Game"
+    let game = new Game();
     this.AUDIO_SHUFFLE_CARDS.play();
 
-    this                        //Dieses Game Objekt wird in ein JSON Objekt umgewandelt und in der Collection "games" gespeichert.
+    //Created game object is converted into a JSON object and is saved to collection 'games' at firestore.
+    this
       .firestore
       .collection('games')
-      /* .add(game.toJSON()) */
-      .add(JSON.parse(JSON.stringify(game)))    //...damit ein Objekt new Player erstellt werden kann!
-      .then ((gameInfo: any) => {            //then() wird im Gegensatz zu subscribe() nicht mehrfach, sondern nur einmal aufgerufen und gibt ein Promise-Objekt zurück.
-        console.log("gameInfo", gameInfo);    //Aus dem Promise gameInfo wird die id ausgelesen:
-        this.router.navigateByUrl('/game/' + gameInfo.id);  //Navigation zum Spiel, welches die betreffende ID in der URL hat.
+      .add(JSON.parse(JSON.stringify(game)))
+      //.then() returns a promise object and is called only one time (in contrast to .subscribe()).
+      .then((gameInfo: any) => {
+        console.log("gameInfo", gameInfo);
+        //We need to read out the ID from the promise object - it is the game ID
+        //Navigate to the game which has the corresponding ID in its URL
+        this.router.navigateByUrl('/game/' + gameInfo.id);
       })
-      
-    
+
   }
 
 }

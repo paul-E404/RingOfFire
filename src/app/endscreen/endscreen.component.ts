@@ -16,10 +16,16 @@ export class EndscreenComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Navigates the user back to startscreen.
+   */
   goBackToStartscreen() {
     this.router.navigateByUrl('/');
   }
 
+  /**
+   * Fires the event to play another round when restart button is clicked.
+   */
   playAnotherRound() {
     this.shuffleCardsSound.play();
     this.restartButtonClicked.emit();
